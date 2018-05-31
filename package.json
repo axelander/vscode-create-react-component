@@ -3,7 +3,7 @@
   "displayName": "create-react-component",
   "description": "",
   "version": "0.0.1",
-  "publisher": "johndoe",
+  "publisher": "mrandersson",
   "engines": {
     "vscode": "^1.23.0"
   },
@@ -11,8 +11,6 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:crc.newWebComponent",
-    "onCommand:crc.newNativeComponent",
     "workspaceContains:**/package.json",
     "onDebug"
   ],
