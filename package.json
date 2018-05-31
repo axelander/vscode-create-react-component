@@ -1,0 +1,60 @@
+{
+  "name": "create-react-component",
+  "displayName": "create-react-component",
+  "description": "",
+  "version": "0.0.1",
+  "publisher": "johndoe",
+  "engines": {
+    "vscode": "^1.23.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:crc.newWebComponent",
+    "onCommand:crc.newNativeComponent",
+    "workspaceContains:**/package.json",
+    "onDebug"
+  ],
+  "main": "./extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "crc.newWebComponent",
+        "title": "New React Component (web)"
+      },
+      {
+        "command": "crc.newNativeComponent",
+        "title": "New React Component (native)"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "crc.newWebComponent",
+          "group": "New React Component",
+          "when": "resourceIsFile"
+        },
+        {
+          "command": "crc.newNativeComponent",
+          "group": "New React Component",
+          "when": "resourceIsFile"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^7.0.43",
+    "eslint": "^4.11.0",
+    "typescript": "^2.6.1",
+    "vscode": "^1.1.6"
+  },
+  "dependencies": {
+    "fs-extra": "^6.0.1"
+  }
+}
