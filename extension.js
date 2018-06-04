@@ -2,7 +2,7 @@ const vscode = require('vscode');
 const fs = require('fs-extra');
 const path = require('path');
 
-async function newComponent(filePath, type = 'WebComponent') {
+async function newComponent(filePath, type) {
   const dirPath = fs.lstatSync(filePath).isDirectory() ? filePath : path.dirname(filePath);
   try {
     const input = await vscode.window.showInputBox({ prompt: 'Component name', value: `${dirPath}/NewComponent`, valueSelection: [dirPath.length + 1, dirPath.length + 13] });
@@ -25,7 +25,12 @@ async function newComponent(filePath, type = 'WebComponent') {
 
     let styleExtension = 'css';
     if (type === 'NativeComponent') styleExtension = 'styles.js';
-    await fs.copy(path.resolve(__dirname, `./templates/${type}/Component.${styleExtension}`), `${componentDir}/${componentName}.${styleExtension}`);
+    if (type === 'WebBemSassComponent') styleExtension = 'scss';
+
+    let styles = await fs.readFileSync(path.resolve(__dirname, `./templates/${type}/Component.${styleExtension}`), 'utf8');
+    styles = styles.replace(/{{COMPONENT_NAME}}/g, componentName)
+
+    await fs.writeFile(`${componentDir}/${componentName}.${styleExtension}`, styles)
 
     const [file] = await vscode.workspace.findFiles(`**/${componentName}.js`);
 
@@ -37,11 +42,15 @@ async function newComponent(filePath, type = 'WebComponent') {
 }
 
 async function newWebComponent ({ path: filePath }) {
-  await newComponent(filePath);
+  await newComponent(filePath, 'WebComponent');
 }
 
 async function newNativeComponent({ path: filePath }) {
   await newComponent(filePath, 'NativeComponent');
+}
+
+async function newWebBemSassComponent ({ path: filePath }) {
+  await newComponent(filePath, 'WebBemSassComponent');
 }
 
 function activate(context) {
@@ -49,9 +58,6 @@ function activate(context) {
 
   context.subscriptions.push(vscode.commands.registerCommand('crc.newWebComponent', newWebComponent));
   context.subscriptions.push(vscode.commands.registerCommand('crc.newNativeComponent', newNativeComponent));
-
-  // context.subscriptions.push(vscode.commands.registerCommand('crc.newNativeComponent', function () {
-  //     vscode.window.showInformationMessage('Create new native component');
-  // }));
+  context.subscriptions.push(vscode.commands.registerCommand('crc.newWebBemSassComponent', newWebBemSassComponent));
 }
 exports.activate = activate;

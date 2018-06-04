@@ -22,6 +22,10 @@
         "title": "New React Component (web)"
       },
       {
+        "command": "crc.newWebBemSassComponent",
+        "title": "New React Component (web bem sass)"
+      },
+      {
         "command": "crc.newNativeComponent",
         "title": "New React Component (native)"
       }
@@ -30,6 +34,11 @@
       "explorer/context": [
         {
           "command": "crc.newWebComponent",
+          "group": "New React Component",
+          "when": "resourceIsFile"
+        },
+        {
+          "command": "crc.newWebBemSassComponent",
           "group": "New React Component",
           "when": "resourceIsFile"
         },
