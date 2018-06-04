@@ -1,9 +1,10 @@
 {
-  "name": "create-react-component",
-  "displayName": "create-react-component",
+  "name": "vscode-create-react-component",
+  "displayName": "vscode-create-react-component",
   "description": "",
   "version": "0.0.1",
   "publisher": "mrandersson",
+  "repository": "https://github.com/axelander/vscode-create-react-component",
   "engines": {
     "vscode": "^1.23.0"
   },
@@ -52,7 +53,8 @@
   },
   "scripts": {
     "postinstall": "node ./node_modules/vscode/bin/install",
-    "test": "node ./node_modules/vscode/bin/test"
+    "test": "node ./node_modules/vscode/bin/test",
+    "build": "vsce package -o vscode-create-react-component.latest.vsix"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.42",
