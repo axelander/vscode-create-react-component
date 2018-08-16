@@ -36,17 +36,17 @@
         {
           "command": "crc.newWebComponent",
           "group": "New React Component",
-          "when": "resourceIsFile"
+          "when": "explorerResourceIsFolder"
         },
         {
           "command": "crc.newWebBemSassComponent",
           "group": "New React Component",
-          "when": "resourceIsFile"
+          "when": "explorerResourceIsFolder"
         },
         {
           "command": "crc.newNativeComponent",
           "group": "New React Component",
-          "when": "resourceIsFile"
+          "when": "explorerResourceIsFolder"
         }
       ]
     }
